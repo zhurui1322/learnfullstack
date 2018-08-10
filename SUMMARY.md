@@ -2,6 +2,6 @@
 
 * [Initial page](README.md)
 * [HTML](html.md)
-* [Untitled](untitled-1.md)
-* [Untitled](untitled-2.md)
+* [CSS](untitled-1.md)
+* [Javascript](untitled-2.md)
 

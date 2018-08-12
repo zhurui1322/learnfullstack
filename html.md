@@ -83,16 +83,17 @@ HTML5 现在已经不是 SGML 的子集，主要是关于图像，位置，存�
 支持HTML5新标签： IE8/IE7/IE6支持通过document.createElement方法产生的标签， 可以利用这一特性让这些浏览器支持HTML5新标签， 浏览器支持新标签后，还需要添加标签默认的样式。 当然也可以直接使用成熟的框架、比如html5shim  
 ****
 
-## **7. 请描述一下 cookies，sessionStorage 和 localStorage 的区别？**
+## **7. cookies，sessionStorage 和 localStorage 的区别？**
 
 cookie是网站为了标示用户身份而储存在用户本地终端（Client Side）上的数据（通常经过加密）cookie数据始终在同源的http请求中携带（即使不需要），记会在浏览器和服务器间来回传递。  
 sessionStorage和localStorage不会自动把数据发给服务器，仅在本地保存。  
-  
-  存储大小：  
+
+
+存储大小：  
       cookie数据大小不能超过4k。  
-      sessionStorage和localStorage 虽然也有存储大小的限制，但比cookie大得多，可以达到5M或更大。  
+      sessionStorage和localStorage 虽然也有存储大小的限制，但比cookie大多，5M或更大。  
   
-  有期时间：  
+有期时间：  
       localStorage    存储持久数据，浏览器关闭后数据不丢失除非主动删除数据；  
       sessionStorage  数据在当前浏览器窗口关闭后自动删除。  
       cookie          设置的cookie过期时间之前一直有效，即使窗口或浏览器关闭  
@@ -105,9 +106,19 @@ sessionStorage和localStorage不会自动把数据发给服务器，仅在本地
 当我们第一次正确配置app cache后，当我们再次访问该应用时，浏览器会首先检查manifest文件是否有变动，如果有变动就会把相应的变得跟新下来，同时改变浏览器里面的app cache，如果没有变动，就会直接把app cache的资源返回，基本流程是这样的。  
 ****
 
-| **`<html lang="en" manifest="index.manifest"> 定义在html头文件中 cache.manifest 文件: CACHE MANIFEST #version 1.3  CACHE:     test.css                 可以缓存的文件  NETWORK:  *                      离线时不可用的文件 FALLBACK:/html5/ 404.html           如果当前资源无法访问 用404来替代html5`** |
-| :--- |
+```markup
+<html lang="en" manifest="index.manifest"> 定义在html头文件中
+cache.manifest 文件:
+CACHE MANIFEST
+#version 1.3
 
+CACHE:
+    test.css                 可以缓存的文件
+
+NETWORK:
+ *                      离线时不可用的文件
+FALLBACK:/html5/ 404.html           如果当前资源无法访问 用404来替代html5
+```
 
 可以通过js来手动更新本地缓存
 
@@ -119,7 +130,7 @@ manifest文件中的cache部分不能使用通配符，必须手动指定，这�
 
 ## **9.Label的作用是什么？是怎么用的？HTML5 feature**
 
-**label标签来定义表单控制间的关系,当用户选择该标签时，浏览器会自动将焦点转到和标签相关的表单控件上。 radio button 点击text会自动选上button**
+label标签来定义表单控制间的关系,当用户选择该标签时，浏览器会自动将焦点转到和标签相关的表单控件上。 radio button 点击text会自动选上button
 
 `<label for="Name">Number:</label>  
 <input type=“text“name="Name" id="Name"/>  
@@ -135,26 +146,33 @@ manifest文件中的cache部分不能使用通配符，必须手动指定，这�
 
 ## **11. 如何实现浏览器内多个标签页之间的通信? \(阿里\)** 
 
-**WebSocket、SharedWorker； 也可以调用localstorge、cookies等本地存储方式；**
+WebSocket、SharedWorker； 也可以调用localstorge、cookies等本地存储方式；
 
-**localstorge另一个浏览上下文里被添加、修改或删除时，它都会触发一个事件， 我们通过监听事件，控制它的值来进行页面信息通信**  
+localstorge另一个浏览上下文里被添加、修改或删除时，它都会触发一个事件， 我们通过监听事件，控制它的值来进行页面信息通信  
   
-
+****
 
 ## **12.Page Visibility API**
 
- **HTML5 通过 visibilityState 的值检测页面当前是否可见，以及打开网页的时间等;  
-  在页面被切换到其他后台进程的时候，自动暂停音乐或视频的播放；**
+ HTML5 通过 visibilityState 的值检测页面当前是否可见，以及打开网页的时间等;  
+  在页面被切换到其他后台进程的时候，自动暂停音乐或视频的播放；
 
-| **function handleVisibilityChange\(\) {   if \(document\[hidden\]\) {     videoElement.pause\(\);   } else {     videoElement.play\(\);   } } document.addEventListener\(visibilityChange, handleVisibilityChange, false\);** |
-| :--- |
-
+```javascript
+function handleVisibilityChange() {
+  if (document[hidden]) {
+    videoElement.pause();
+  } else {
+    videoElement.play();
+  }
+}
+document.addEventListener(visibilityChange, handleVisibilityChange, false);
+```
 
 ##  **13. 实现不使用 border 画出1px高的线**
 
-| **&lt;div style="height:1px;overflow:hidden;background:red"&gt;&lt;/div&gt;** |
-| :--- |
-
+```markup
+<div style="height:1px;overflow:hidden;background:red"></div>
+```
 
 
 

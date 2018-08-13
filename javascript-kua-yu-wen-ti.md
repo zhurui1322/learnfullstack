@@ -22,8 +22,8 @@ jsonp解决跨域问题的原理是，浏览器的script标签是不受同源策
 
 ##  通过CORS解决跨域问题
 
-**CORS的本质让服务器通过新增响应头Access-Control-Allow-Origin,通过HTTP方式来实现资源共享,让每个请求的服务直接返回资源.它使用了HTTP交互方式来确定请求源是否有资格请求该资源,并且通过设置HTTP Header来控制访问资源的权限.**  
-
+CORS的本质让服务器通过新增响应头Access-Control-Allow-Origin,通过HTTP方式来实现资源共享,让每个请求的服务直接返回资源.它使用了HTTP交互方式来确定请求源是否有资格请求该资源,并且通过设置HTTP Header来控制访问资源的权限.  
+****
 
 **后端设置一下response的header:**
 
@@ -33,6 +33,6 @@ Access-Control-Allow-Methods: "GET"
 Access-Control-Max-Age: "60"   
 ```
 
-**会先发一个option请求，它告诉了浏览器此后的60秒内,所有域都可以通过GET方法进行跨域访问该资源.然后浏览器自动再次发送了真正的GET请求,并返回对应的结果.**  
+会先发一个option请求，它告诉了浏览器此后的60秒内,所有域都可以通过GET方法进行跨域访问该资源.然后浏览器自动再次发送了真正的GET请求,并返回对应的结果.  
 
 

@@ -1,10 +1,10 @@
 # HTML
 
-## **1. DOCTYPE**
+## **DOCTYPE**
 
 &lt;!DOCTYPE&gt;声明位于位于HTML文档中的第一行，处于 &lt;html&gt; 标签之前。告知浏览器的解析器用什么文档标准解析这个文档HTML5 中的写法&lt;!DOCTYPE html&gt;
 
-## **2. display: block 和 inline 的区别**
+## **display: block 和 inline 的区别**
 
 常见的块级元素有 DIV, FORM, TABLE, P, PRE, H1~H6, DL, OL, UL 等等。  
 常见的内联元素有 SPAN, A, STRONG, EM, LABEL, INPUT, SELECT, TEXTAREA, IMG, BR 等等。  
@@ -37,7 +37,7 @@ img tag本是inline, 经常需要设置宽高，所以一般设置为inline-bloc
 
 * 完全移除此元素
 
-## **3. 空\(void\)元素有那些**
+## **空void元素有那些**
 
 空元素是在开始标签中关闭的。常见的空元素：&lt;br&gt; &lt;hr&gt; &lt;img&gt; &lt;input&gt; &lt;link&gt; &lt;meta&gt;
 
@@ -45,7 +45,7 @@ img tag本是inline, 经常需要设置宽高，所以一般设置为inline-bloc
   
 ****
 
-## **4. 介绍一下你对浏览器内核的理解？** 
+## **介绍一下你对浏览器内核的理解？** 
 
 主要分成两部分：渲染引擎\(layout engineer或Rendering Engine\)和JS引擎。
 
@@ -55,7 +55,7 @@ JS引擎则：解析和执行javascript来实现网页的动态效果。 最开�
 
 \*\*\*\*
 
-## **5. 常见的浏览器内核有哪些？** 
+## **常见的浏览器内核有哪些？** 
 
 Trident内核：IE,MaxThon,TT,The World,360,搜狗浏览器等。\[又称MSHTML\]
 
@@ -67,7 +67,7 @@ Webkit内核：Safari,Chrome等。 \[ Chrome的：Blink（WebKit的分支）\]
   
 ****
 
-## **6. html5有哪些新特性？如何处理HTML5新标签的浏览器兼容问题？** 
+## **html5有哪些新特性？如何处理HTML5新标签的浏览器兼容问题？** 
 
 HTML5 现在已经不是 SGML 的子集，主要是关于图像，位置，存储，多任务功能。
 
@@ -83,7 +83,7 @@ HTML5 现在已经不是 SGML 的子集，主要是关于图像，位置，存�
 支持HTML5新标签： IE8/IE7/IE6支持通过document.createElement方法产生的标签， 可以利用这一特性让这些浏览器支持HTML5新标签， 浏览器支持新标签后，还需要添加标签默认的样式。 当然也可以直接使用成熟的框架、比如html5shim  
 ****
 
-## **7. cookies，sessionStorage 和 localStorage 的区别？**
+## **cookies，sessionStorage 和 localStorage 的区别？**
 
 cookie是网站为了标示用户身份而储存在用户本地终端（Client Side）上的数据（通常经过加密）cookie数据始终在同源的http请求中携带（即使不需要），记会在浏览器和服务器间来回传递。  
 sessionStorage和localStorage不会自动把数据发给服务器，仅在本地保存。  
@@ -99,7 +99,7 @@ sessionStorage和localStorage不会自动把数据发给服务器，仅在本地
       cookie          设置的cookie过期时间之前一直有效，即使窗口或浏览器关闭  
 ****
 
-## **8. HTML5的离线储存怎么使用工作原理能不能解释一下？** 
+## **HTML5的离线储存怎么使用工作原理能不能解释一下？** 
 
 首先manifest是一个后缀名为manifest的文件，在文件中定义那些需要缓存的文件，支持manifest的浏览器，会将按照manifest文件的规则，像文件保存在本地，从而在没有网络链接的情况下，也能访问页面。
 
@@ -128,7 +128,7 @@ FALLBACK:/html5/ 404.html           如果当前资源无法访问 用404来替�
 manifest文件中的cache部分不能使用通配符，必须手动指定，这实在太让人不可理解，文件一多，就成了体力活。使用grunt 可以自动化生成manifest文件  
 ****
 
-## **9.Label的作用是什么？是怎么用的？HTML5 feature**
+## **Label的作用是什么？是怎么用的？HTML5 feature**
 
 label标签来定义表单控制间的关系,当用户选择该标签时，浏览器会自动将焦点转到和标签相关的表单控件上。 radio button 点击text会自动选上button
 
@@ -144,7 +144,7 @@ label标签来定义表单控制间的关系,当用户选择该标签时，浏�
 `autocomplete=off`  
 ****
 
-## **11. 如何实现浏览器内多个标签页之间的通信? \(阿里\)** 
+## **如何实现浏览器内多个标签页之间的通信? \(阿里\)** 
 
 WebSocket、SharedWorker； 也可以调用localstorge、cookies等本地存储方式；
 
@@ -152,7 +152,7 @@ localstorge另一个浏览上下文里被添加、修改或删除时，它都会
   
 ****
 
-## **12.Page Visibility API**
+## **Page Visibility API**
 
  HTML5 通过 visibilityState 的值检测页面当前是否可见，以及打开网页的时间等;  
   在页面被切换到其他后台进程的时候，自动暂停音乐或视频的播放；
@@ -168,11 +168,22 @@ function handleVisibilityChange() {
 document.addEventListener(visibilityChange, handleVisibilityChange, false);
 ```
 
-##  **13. 实现不使用 border 画出1px高的线**
+##  **实现不使用 border 画出1px高的线**
 
 ```markup
 <div style="height:1px;overflow:hidden;background:red"></div>
 ```
+
+## **前端性能优化的方法**
+
+* 减少http请求次数：CSS Sprites, JS、CSS源码压缩、图片大小控制合适；网页Gzip，CDN托管，data缓存 ，图片服务器。 
+* 前端模板 JS+数据，减少由于HTML标签导致的带宽浪费，前端用变量保存AJAX请求结果，每次操作本地变量，不用请求，减少请求次数
+*  用innerHTML代替DOM操作，减少DOM操作次数，优化javascript性能
+* 当需要设置的样式很多时设置className而不是直接操作style
+*  少用全局变量、缓存DOM节点查找的结果。减少IO读取操作
+* 避免使用CSS Expression（css表达式\)又称Dynamic properties\(动态属性\)
+* 片预加载，将样式表放在顶部，将脚本放在底部  加上时间戳。
+* 避免在页面的主体布局中使用table，table要等其中的内容完全下载之后才会显示出来，显示比div+css布局慢。 对普通的网站有一个统一的思路，就是尽量向前端优化、减少数据库操作、减少磁盘IO。向前端优化指的是，在不影响功能和体验的情况下，能在浏览器执行的不要在服务端执行，能在缓存服务器上直接返回的不要到应用服务器，程序能直接取得的结果不要到外部取得，本机内能取得的数据不要到远程取，内存能取到的不要到磁盘取，缓存中有的不要去数据库查询。减少数据库操作指减少更新次数、缓存结果减少查询次数、将数据库执行的操作尽可能的让你的程序完成（例如join查询），减少磁盘IO指尽量不使用文件系统作为缓存、减少读写文件次数等。程序优化永远要优化慢的部分，换语言是无法“优化”的。 
 
 
 

@@ -43,7 +43,7 @@ img tag本是inline, 经常需要设置宽高，所以一般设置为inline-bloc
 
 不过html5 需要用 &lt;br /&gt;来关闭空元素
 
-## **介绍一下你对浏览器内核的理解？** 
+## **浏览器内核的理解？** 
 
 主要分成两部分：渲染引擎\(layout engineer或Rendering Engine\)和JS引擎。
 

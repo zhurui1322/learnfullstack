@@ -55,7 +55,7 @@ var z = function() { };
 console.log(typeof z); // object 
 ```
 
-## **JavaScript有几种类型的值？画一下他们的内存图吗？** 
+## **JavaScript有几种类型的值？画一下他们的内存图吗？**
 
 栈：原始数据类型（Undefined，Null，Boolean，Number、String）
 
@@ -67,6 +67,25 @@ console.log(typeof z); // object
 
 
 ![](https://lh3.googleusercontent.com/-K_Ox_7omsT8p2dExuuLnCfpoU9fYMlhmQCsyDaDnzrZ8WywDq2QP3CUTK25ySc8SqE51pQ8TR7ISnwVGaFoOUyshDkb1k7ckF3sjWSrK4LeiDHJM8NREid8uzTMrnqNXudPOVRT)
+
+## Javascript 作用域的相关问题
+
+当Javanese程序编译时，会先生成Global Object \(windows in browser\)   
+This 也就是指向Global Object   
+outer environment 
+
+程序会先给变量和函数预解析**“hoisting",** 预解析就是把所有的声明提升到顶部。
+
+varable 储存再stack中， 但是只是define 并没有赋值 （预解析）  
+function 储存再heap中，全部的code都会存储
+
+![execution context stack ](https://lh6.googleusercontent.com/PvAgNoS5DG6OHr7bL1LwBEuwwsjiuMk3S7w-U8uIGSnlJAS2gzvVNWVpRhqXcdEcfZ8Nw78vUeNOzX8yOzOW2zU0EhNhNFCdnhxGRJnBLX1GlSiRynwFmvVS8XI2rWsuceSiBigj)
+
+## **Javascript作用链域?**
+
+全局函数无法查看局部函数的内部细节，但局部函数可以查看其上层的函数细节，直至全局细节。
+
+当需要从局部函数查找某一属性或方法时，如果当前作用域没有找到，就会上溯到上层作用域查找，直至全局函数，这种组织形式就是作用域链。
 
 ## **null，undefined 的区别？**
 
@@ -87,6 +106,12 @@ null的类型\(typeof\)是object；是一个对象\(空对象, 没有任何属�
 
 **null === undefined // false**  
 {% endhint %}
+
+
+
+```text
+
+```
 
 ## **eval是做什么的？**
 
@@ -147,8 +172,9 @@ in运算符可以用来判断，某个实例是否含有某个属性，不管是
 
 or
 
-`Person.prototype.name = function() return this.firstName + " " +this.lastName;};`  
-****
+`Person.prototype.name = function() return this.firstName + " " +this.lastName;};`
+
+![](https://lh4.googleusercontent.com/NtaISmIYIbf4zLreiUCMkvXvaAR9wjug9NAjJ7JYx5tDiBVPTjNeWh20rgmShaw4CtzDAdVU9lZNQ4TDuAvi-dVarYEgETrf__icKu4sp5RqhaciXdCiyBggTfHPwiZiJ9uKMhnE)
 
 ## Javacript继承的几种实现方式？
 
@@ -327,14 +353,8 @@ javascript创建对象简单的说,无非就是使用内置对象或各种自定
        }
      var camry =new Car("凯美瑞",27);
      camry.sell();
+
 ```
-
-## **Javascript作用链域?**
-
-全局函数无法查看局部函数的内部细节，但局部函数可以查看其上层的函数细节，直至全局细节。
-
-当需要从局部函数查找某一属性或方法时，如果当前作用域没有找到，就会上溯到上层作用域查找，直至全局函数，这种组织形式就是作用域链。  
-
 
 ## **谈谈This对象的理解**
 
@@ -401,6 +421,55 @@ result(); // 1000
 
 这段代码中另一个值得注意的地方，就是"nAdd=function\(\){n+=1}"这一行，首先在nAdd前面没有使用var关键字，因此nAdd是一个全局变量，而不是局部变量。其次，nAdd的值是一个匿名函数（anonymous function），而这个匿名函数本身也是一个闭包，所以nAdd相当于是一个setter，可以在函数外部对函数内部的局部变量进行操作。
 
+## **Call\(\) Apply\(\) Bind\(\)**
+
+ The **`bind()`** method creates a new function that, when called, has its `this` keyword set to the provided value, 
+
+ The **`call()`** method calls a function with a given `this` value and arguments provided individually.
+
+ The **`apply()`** method calls a function with a given `this` value, and `arguments` provided as an array
+
+```javascript
+var person = {
+    firstname: 'John',
+    lastname: 'Doe',
+    getFullName: function() {
+        var fullname = this.firstname + ' ' + this.lastname;
+        return fullname;
+    }
+}
+
+var logName = function(lang1, lang2) {
+    console.log('Logged: ' + this.getFullName());
+    console.log('Arguments: ' + lang1 + ' ' + lang2);
+    console.log('-----------');
+}
+
+var logPersonName = logName.bind(person);
+logPersonName('en');
+logName.call(person, 'en', 'es');
+logName.apply(person, ['en', 'es']);
+```
+
+## **Funtion currying**
+
+create a copy of function but with some present parameter  
+
+
+```javascript
+function multiply(a, b, c) {
+    return a*b*c;   
+}
+
+var multipleByTwo = multiply.bind(this, 2);
+console.log(multipleByTwo(4,2));
+
+var multipleByThree = multiply.bind(this, 3);
+console.log(multipleByThree(4));
+```
+
+## \*\*\*\*
+
 ## **Json 转换**
 
 ```javascript
@@ -442,4 +511,60 @@ person = a 在不是strict模式下可以编译 但是再strict模式会说undef
 // Assignment to a new property on a non-extensible object 
 
 // Assignment to a getter-only property
+
+## 数据的操作
+
+* push\(\): Adds one or more elements to the end of an array and returns the new length of the array.
+* pop\(\): Removes the last element from an array and returns that element.
+* shift\(\): Removes the first element from an array and returns that element.
+* reverse\(\): Reverses the order of the elements of an array — the first becomes the last, and the last becomes the first.
+* sort\(\): Sorts the elements of an array in place and returns the array.
+* splice\(\): Adds and/or removes elements from an array.
+* unshift\(\): Adds one or more elements to the front of an array and returns the new **length** of the array.
+
+删除首尾的方式是使用:`pop`和`shift`。但是如果我们要删除特殊的指定元素，先要获取到指定元素的下标，然后使用`splice`进行替换。
+
+```javascript
+var months = ['Jan', 'March', 'April', 'June'];
+months.splice(1, 1); -> Jan April June
+months.splice(1, 0, 'Feb') -> Jan Feb March April June
+```
+
+ES5中新加的方法
+
+forEach : 不会遍历没有定义的元素  
+map  
+filter  
+some  
+every  
+indexOf  
+lastIndexOf  
+reduce  
+reduceRight: 从右边开始遍历
+
+## setTimeout的误区 {#settimeout%E7%9A%84%E8%AF%AF%E5%8C%BA}
+
+而是setInterval 和 setTimeout 函数运转的最短周期是 5ms 左右
+
+如果需要更加短的周期，可以使用:
+
+1. requestAnimationFrame 它允许 JavaScript 以 60+帧/s 的速度处理动画，他的运行时间间隔比 setTimeout 是要短很多的。 
+2. process.nextTick 这个是 NodeJS 中的一个函数，利用他可以几乎达到上面看到的 while 循环的效率 
+3. ajax 或者 插入节点 的 readState 变化 
+4. MutationObserver 
+5. setImmediate
+
+ 由于Javascript是单线程的，所以会存在被阻塞的情况
+
+ try...catch捕捉不到它的错误:
+
+## 生成随机数
+
+```text
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+```
+
+
 

@@ -6,6 +6,29 @@
 
 即使是在 http://localhost:80/ 页面请求 http://127.0.0.1:80/ 也会有跨域问题
 
+```text
+URL                                      说明                    是否允许通信
+http://www.domain.com/a.js
+http://www.domain.com/b.js         同一域名，不同文件或路径           允许
+http://www.domain.com/lab/c.js
+
+http://www.domain.com:8000/a.js
+http://www.domain.com/b.js         同一域名，不同端口                不允许
+ 
+http://www.domain.com/a.js
+https://www.domain.com/b.js        同一域名，不同协议                不允许
+ 
+http://www.domain.com/a.js
+http://192.168.4.12/b.js           域名和域名对应相同ip              不允许
+ 
+http://www.domain.com/a.js
+http://x.domain.com/b.js           主域相同，子域不同                不允许
+http://domain.com/c.js
+ 
+http://www.domain1.com/a.js
+http://www.domain2.com/b.js        不同域名                         不允许
+```
+
 ## 通过jsonp解决跨域问题
 
 jsonp解决跨域问题的原理是，浏览器的script标签是不受同源策略限制\(你可以在你的网页中设置script的src属性问cdn服务器中静态文件的路径\)。那么就可以使用script标签从服务器获取数据，请求时添加一个参数为callbakc=?，?号时你要执行的回调方法。
@@ -16,11 +39,47 @@ jsonp解决跨域问题的原理是，浏览器的script标签是不受同源策
 
 当我们向服务器提交一个JSONP的请求时,我们给服务传了一个特殊的参数,告诉服务端要对结果特殊处理一下。这样服务端返回的数据就会进行一点包装，客户端就可以处理。
 
-举个例子，服务端和客户端约定要传一个名为callback的参数来使用JSONP功能。比如请求的参数如下:
+```javascript
+  /*** 原生实现 ***/
+ <script>
+    var script = document.createElement('script');
+    script.type = 'text/javascript';
 
-[http://www.example.net/sample.aspx?callback=mycallback](http://www.example.net/sample.aspx?callback=mycallback) 如果没有后面的callback参数，即不使用JSONP的模式，该服务的返回结果可能是一个单纯的json字符串，比如：{ foo : 'bar' }。但是如果使用JSONP模式，那么返回的是一个函数调用: mycallback\({ foo : 'bar' }\)，这样我们在代码之中，定义一个名为mycallback的回调函数，就可以解决跨域问题了。
+    // 传参并指定回调执行函数为onBack
+    script.src = 'http://www.domain2.com:8080/login?user=admin&callback=onBack';
+    document.head.appendChild(script);
 
-##  通过CORS解决跨域问题
+    // 回调执行函数
+    function onBack(res) { 
+        alert(JSON.stringify(res));
+    }
+ </script>
+ 
+ /*** jquery ajax ***/
+ $.ajax({
+    url: 'http://www.domain2.com:8080/login',
+    type: 'get',
+    dataType: 'jsonp',  // 请求方式为jsonp
+    jsonpCallback: "onBack",    // 自定义回调函数名
+    data: {}
+});
+
+
+```
+
+{% hint style="info" %}
+ jsonp缺点：只能实现get一种请求。
+{% endhint %}
+
+## **document.domain + iframe跨域**
+
+## **location.hash + iframe跨域**
+
+##  **window.name + iframe跨域**
+
+## **postMessage跨域**
+
+## 通过CORS解决跨域问题
 
 CORS的本质让服务器通过新增响应头Access-Control-Allow-Origin,通过HTTP方式来实现资源共享,让每个请求的服务直接返回资源.它使用了HTTP交互方式来确定请求源是否有资格请求该资源,并且通过设置HTTP Header来控制访问资源的权限.  
 ****
@@ -31,6 +90,16 @@ CORS的本质让服务器通过新增响应头Access-Control-Allow-Origin,通过
 Access-Control-Allow-Origin: "*"
 Access-Control-Allow-Methods: "GET"
 Access-Control-Max-Age: "60"   
+
+ res.writeHead(200, {
+            'Access-Control-Allow-Credentials': 'true',     // 后端允许发送Cookie
+            'Access-Control-Allow-Origin': 'http://www.domain1.com',    // 允许访问的域（协议+域名+端口）
+            /* 
+             * 此处设置的cookie还是domain2的而非domain1，因为后端也不能跨域写cookie(nginx反向代理可以实现)，
+             * 但只要domain2中写入一次cookie认证，后面的跨域接口都能从domain2中获取cookie，从而实现所有的接口都能跨域访问
+             */
+            'Set-Cookie': 'l=a123456;Path=/;Domain=www.domain2.com;HttpOnly'  // HttpOnly的作用是让js无法读取cookie
+        });
 ```
 
 会先发一个option请求，它告诉了浏览器此后的60秒内,所有域都可以通过GET方法进行跨域访问该资源.然后浏览器自动再次发送了真正的GET请求,并返回对应的结果.  

@@ -51,7 +51,7 @@ img tag本是inline, 经常需要设置宽高，所以一般设置为inline-bloc
 
 JS引擎则：解析和执行javascript来实现网页的动态效果。 最开始渲染引擎和JS引擎并没有区分的很明确，后来JS引擎越来越独立，内核就倾向于只指渲染引擎。
 
-## **常见的浏览器内核有哪些？** 
+## **常见的浏览器内核有哪些？**
 
 Trident内核：IE,MaxThon,TT,The World,360,搜狗浏览器等。\[又称MSHTML\]
 
@@ -59,8 +59,7 @@ Gecko内核：Netscape6及以上版本，FF,MozillaSuite/SeaMonkey等
 
 Presto内核：Opera7及以上。 \[Opera内核原为：Presto，现为：Blink;\]
 
-Webkit内核：Safari,Chrome等。 \[ Chrome的：Blink（WebKit的分支）\]  
-****
+Webkit内核：Safari,Chrome等。 \[ Chrome的：Blink（WebKit的分支）\]
 
 ## **html5有哪些新特性？如何处理HTML5新标签的浏览器兼容问题？**
 
@@ -72,8 +71,7 @@ HTML5 现在已经不是 SGML 的子集，主要是关于图像，位置，存�
 
 语意化更好的内容元素，比如 article、footer、header、nav、section; 表单控件，calendar、date、time、email、url、search;
 
-新的技术webworker, websocket, Geolocation;  
-
+新的技术webworker, websocket, Geolocation;
 
 支持HTML5新标签： IE8/IE7/IE6支持通过document.createElement方法产生的标签， 可以利用这一特性让这些浏览器支持HTML5新标签， 浏览器支持新标签后，还需要添加标签默认的样式。 当然也可以直接使用成熟的框架、比如html5shim
 
@@ -91,7 +89,7 @@ sessionStorage和localStorage不会自动把数据发给服务器，仅在本地
       sessionStorage  数据在当前浏览器窗口关闭后自动删除。  
       cookie          设置的cookie过期时间之前一直有效，即使窗口或浏览器关闭
 
-## **HTML5的离线储存怎么使用工作原理能不能解释一下？** 
+## **HTML5的离线储存怎么使用工作原理能不能解释一下？**
 
 首先manifest是一个后缀名为manifest的文件，在文件中定义那些需要缓存的文件，支持manifest的浏览器，会将按照manifest文件的规则，像文件保存在本地，从而在没有网络链接的情况下，也能访问页面。
 
@@ -176,6 +174,12 @@ document.addEventListener(visibilityChange, handleVisibilityChange, false);
 * 避免使用CSS Expression（css表达式\)又称Dynamic properties\(动态属性\)
 * 片预加载，将样式表放在顶部，将脚本放在底部  加上时间戳。
 * 避免在页面的主体布局中使用table，table要等其中的内容完全下载之后才会显示出来，显示比div+css布局慢。 对普通的网站有一个统一的思路，就是尽量向前端优化、减少数据库操作、减少磁盘IO。向前端优化指的是，在不影响功能和体验的情况下，能在浏览器执行的不要在服务端执行，能在缓存服务器上直接返回的不要到应用服务器，程序能直接取得的结果不要到外部取得，本机内能取得的数据不要到远程取，内存能取到的不要到磁盘取，缓存中有的不要去数据库查询。减少数据库操作指减少更新次数、缓存结果减少查询次数、将数据库执行的操作尽可能的让你的程序完成（例如join查询），减少磁盘IO指尽量不使用文件系统作为缓存、减少读写文件次数等。程序优化永远要优化慢的部分，换语言是无法“优化”的。 
+
+## 
+
+## 什么是DOM  Document Object Model
+
+ 就是将XML（或者HTML）内的节点定义成基本统一的对象数据可以供程序语言（如javaScript）控制的技术规范。
 
 ## 原生 JavaScript 的 DOM 操作
 

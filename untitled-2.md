@@ -176,6 +176,26 @@ or
 
 ![](https://lh4.googleusercontent.com/NtaISmIYIbf4zLreiUCMkvXvaAR9wjug9NAjJ7JYx5tDiBVPTjNeWh20rgmShaw4CtzDAdVU9lZNQ4TDuAvi-dVarYEgETrf__icKu4sp5RqhaciXdCiyBggTfHPwiZiJ9uKMhnE)
 
+## proto VS  prototype
+
+_proto_ 隐式原型
+
+* 每一个函数在创建之后都会拥有一个名为prototype的属性，这个属性指向函数的原型对象。
+* 显式原型的作用：用来实现基于原型的继承与属性的共享。
+
+_prototype_ 显式原型
+
+* avaScript中任意对象都有一个内置属性\[\[prototype\]\]，在ES5之前没有标准的方法访问这个内置属性，但是大多数浏览器都支持通过\_\_proto\_\_来访问
+* 隐式原型的作用：构成原型链，同样用于实现基于原型的继承。举个例子，当我们访问obj这个对象中的x属性时，如果在obj中找不到，那么就会沿着\_\_proto\_\_依次查找
+
+ \_\_proto\_\_是**每个对象**都有的一个属性，而prototype是**函数**才会有的属性。
+
+ \_\_proto\_\_指向的是**当前对象**的**原型对象**，而prototype指向的，是以**当前函数**作为**构造函数**构造出来的**对象**的**原型对象**
+
+![](https://pic3.zhimg.com/80/58f2b9242ceddea0462689a4b71486ee_hd.png)
+
+
+
 ## Javacript继承的几种实现方式？
 
 ### **1.构造函数绑定**

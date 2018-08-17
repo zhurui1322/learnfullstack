@@ -170,3 +170,21 @@ CSS unit
 
 rem 
 
+## float 以及 clear 
+
+ 浮动可以理解为让某个div元素脱离标准流，漂浮在标准流之上，和标准流不是一个层次。
+
+![div3 &#x8BBE;&#x7F6E;&#x4E86;float: left](.gitbook/assets/27005043-61e7e3050eb3466d99f25b10f449daa3.png)
+
+![div3 &#x8BBE;&#x7F6E;&#x4E86;float: right](.gitbook/assets/27005121-3bfe4640443c4cd19c850857cc1ce39b.png)
+
+![div3 div4 &#x540C;&#x65F6;&#x8BBE;&#x7F6E;&#x4E86;float: left](.gitbook/assets/27005158-1b23072329b04449a4438af06cbb8387.png)
+
+假如某个div元素A是浮动的，如果A元素上一个元素也是浮动的，那么A元素会跟随在上一个元素的后边\(如果一行放不下这两个元素，那么A元素会被挤到下一行\)；  
+如果A元素上一个元素是标准流中的元素，那么A的相对垂直位置不会改变，也就是说A的顶部总是和上一个元素的底部对齐。
+
+clear : none \| left \| right \| both
+
+div1, div2 设置float left, 所以两个div 平行浮动，要想让div2下移，就必须在div2的CSS样式中使用浮动。clear:left  
+
+

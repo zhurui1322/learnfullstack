@@ -92,7 +92,7 @@ div {
 
 
 
-## **position的值relative和absolute定位原点是？** 
+## **position的值relative和absolute定位原理**
 
 * static
 * relative
@@ -100,8 +100,7 @@ div {
 * absolute
 * sticky
 
-Static:    默认值。没有定位，元素出现在正常的流中（忽略 top, bottom, left, right z-index 声明）  
-
+Static:    默认值。没有定位，元素出现在正常的流中（忽略 top, bottom, left, right z-index 声明）
 
 relative: 相对于其他的relative 元素， 可以设置top right bottom left 的属性来定位
 
@@ -111,6 +110,19 @@ absolute; 对于relative的父元素定位
 
 
 ![&#x72D7;&#x72D7;&#x7684;&#x56FE;&#x7247;&#x5C31;&#x662F;&#x7EDD;&#x5BF9;&#x5B9A;&#x4F4D;&#xFF0C;&#x6839;&#x636E;&#x7236;&#x76F8;&#x5BF9;&#x5143;&#x7D20;&#x5B9A;&#x4F4D;](https://lh4.googleusercontent.com/sCjzFWq7P_YCJkkKghfqlIVcvajAxOP_AvD3h8uKO2wgNgRl30s-fczz_vJTmuczz0BbzjkX6-F_B9Sg-kUD821xCPjn9qoCJvJIndrQrJFTq2IjjJfLNnj-DjBEuBetsIxTzEDi)
+
+## CSS Units
+
+* cm:  centimeters
+* mm:  millimeters
+* in: inches 
+* px: pixels
+* pt: poiny
+* pv: picas
+
+em:  Relative to the font-size of the element \(2em means 2 times the size of the current font\)
+
+
 
 ## **CSS3有哪些新特性？**
 
@@ -187,4 +199,27 @@ clear : none \| left \| right \| both
 
 div1, div2 设置float left, 所以两个div 平行浮动，要想让div2下移，就必须在div2的CSS样式中使用浮动。clear:left  
 
+
+## 圣杯布局和
+
+ 圣杯布局： **左右两栏固定宽度，中间部分自适应**
+
+* **全部是float left， container width: 100%**
+* \*\*\*\*
+
+  ![](https://upload-images.jianshu.io/upload_images/1747023-4cc87f17580719ef.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/700)
+
+* **利用margin-left: -100%**  也就是left往左移main的整个宽度
+* 利用margin-left: -190px 也就是right往左移main的右侧
+
+  ![](https://upload-images.jianshu.io/upload_images/1747023-030eb42e36e70d12.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/700)
+
+* 需要给con容器加padding值![](https://upload-images.jianshu.io/upload_images/1747023-cd2ffa0adf92a35d.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/700)
+* 设置left right div 的left right值，可以定义元素的左右边缘，注意要给元素定位，relative or absolute
+
+  ![](https://upload-images.jianshu.io/upload_images/1747023-3b9fd9e26a247c87.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/700)
+
+## 双飞翼布局
+
+当圣杯布局已经形成同行排列，只不过main值被覆盖了，圣杯布局的第三步是给con容器添加padding属性，而双飞翼布局是为main里面的内容再加一个div，让main的内容包含在内层div里，
 

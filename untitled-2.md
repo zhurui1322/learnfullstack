@@ -259,7 +259,7 @@ var Doctor = object(Chinese);
 Doctor.career = '医生';
 ```
 
-### 2.浅拷贝
+## 浅拷贝
 
 浅拷贝有问题就是子对象获得是地址 当父对象被篡改的时候 会影响子对象
 
@@ -277,7 +277,7 @@ function extendCopy(p) {
 }
 ```
 
-### 3.深拷贝
+## 深拷贝
 
 ```javascript
 obj1 = { a: 0 , b: { c: 0}};
@@ -375,6 +375,42 @@ javascript创建对象简单的说,无非就是使用内置对象或各种自定
      camry.sell();
 
 ```
+
+## 普通函数和构造函数的区别
+
+普通函数：不使用new运算符的函数就是普通函数，最简单的函数
+
+构造函数：如用函数用来初始化\(使用**new**运算符\)一个新建的对象，我们称之为构造函数\(constructor\)
+
+```javascript
+function Prince(name,age){
+    this.gender="male";
+    this.kind=true;
+    this.rich=true;
+    this.name=name;
+    this.age=age;
+}
+Prince.prototype.toFrog=function(){
+    console.log("Prince "+this.name+" turned into a frog.");
+}
+var prince=new Prince("charming",25);
+prince.toFrog();//Prince charming turned into a frog.
+prince.kind;//true
+```
+
+```javascript
+//当以new调用构造函数(执行var p = new Person())时，函数内部会发生以下情况:
+//1.创建一个空对象
+var prince = {}
+//2.this变量指向对象p
+Prince .call(prince)
+//3.p继承了构造函数Person()的原型
+prince.__proto__ = Prince.prototype
+```
+
+构造函数里一般是没有return的，但是如果return的是五种简单类型，忽视return，但是如果是object, 则不再返回this 对象，而是返回return的值。
+
+
 
 ## **谈谈This对象的理解**
 
@@ -586,5 +622,53 @@ function getRandomInt(min, max) {
 }
 ```
 
+## 事件冒泡
 
+在 document.addEventListener 的时候我们可以设置事件模型：事件冒泡、事件捕获，一般来说都是用事件冒泡的模型；
+
+
+
+![](https://pic2.zhimg.com/80/v2-bf3b8dbab027713a2b21b9e8a5b7a6c4_hd.jpg)
+
+  
+捕获阶段：在事件冒泡的模型中，捕获阶段不会响应任何事件； 目标阶段：目标阶段就是指事件响应到触发事件的最底层元素上； 冒泡阶段：冒泡阶段就是事件的触发响应会从最底层目标一层层地向外到最外层（根节点），事件代理即是利用事件冒泡的机制把里层所需要响应的事件绑定到外层；\#\#\# 事件
+
+## 事件委托
+
+一般来讲，会把一个或者一组元素的事件委托到它的父层或者更外层元素上，真正绑定事件的是外层元素，当事件响应到需要绑定的元素上时，会通过事件冒泡机制从而触发它的外层元素的绑定事件上，然后在外层元素上去执行函数。
+
+ **委托的优点**
+
+ 减少内存消耗  
+
+```markup
+<ul id="list">
+  <li>item 1</li>
+  <li>item 2</li>
+  <li>item 3</li>
+  ......
+  <li>item n</li>
+</ul>
+<** ...... 代表中间还有未知数个 li **>
+<** 这个点击事件绑定到他的父层，也就是 `ul` 上 w**>
+<** 然后在执行事件的时候再去匹配判断目标元素 **>
+```
+
+####  动态绑定事件
+
+因为事件是绑定在父层的，和目标元素的增减是没有关系的，执行到目标元素是在真正响应执行事件函数的过程中去匹配的；
+
+```javascript
+// 给父层元素绑定事件
+document.getElementById('list').addEventListener('click', function (e) {
+  // 兼容性处理
+  var event = e || window.event;
+  var target = event.target || event.srcElement;
+  if (target.matches('li.class-1')) {
+    console.log('the content is: ', target.innerHTML);
+  }
+});
+```
+
+ 比如 focus、blur 之类的事件本身没有事件冒泡机制，所以无法委托；
 

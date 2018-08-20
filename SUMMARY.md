@@ -15,6 +15,7 @@
 * [前后端分离实践](qian-hou-duan-fen-li-shi-jian.md)
 * [ECMAScript 7](ecmascript-7.md)
 * [DOM](dom.md)
-* [AngularJs 1](angularjs-1.md)
+* [前端框架问题](angularjs-1.md)
 * [Behavior Question](behavior-question.md)
+* [Javascript十大常用设计模式](javascript-shi-da-chang-yong-she-ji-mo-shi.md)
 

@@ -90,8 +90,6 @@ div {
 * table         此元素会作为块级表格来显示。
 * inherit       规定应该从父元素继承 display 属性的值。
 
-
-
 ## **position的值relative和absolute定位原理**
 
 * static
@@ -117,10 +115,11 @@ absolute; 对于relative的父元素定位
 * mm:  millimeters
 * in: inches 
 * px: pixels
-* pt: poiny
+* pt: point
 * pv: picas
-
-em:  Relative to the font-size of the element \(2em means 2 times the size of the current font\)
+* em:  Relative to the font-size of the element \(2em means 2 times the size of the current font\)
+* rem: Relative to font-size of the root element
+* % Relative to the parent element
 
 
 
@@ -221,5 +220,66 @@ div1, div2 设置float left, 所以两个div 平行浮动，要想让div2下移�
 
 ## 双飞翼布局
 
-当圣杯布局已经形成同行排列，只不过main值被覆盖了，圣杯布局的第三步是给con容器添加padding属性，而双飞翼布局是为main里面的内容再加一个div，让main的内容包含在内层div里，
+当圣杯布局已经形成同行排列，只不过main值被覆盖了，圣杯布局的第三步是给con容器添加padding属性，而双飞翼布局是为main里面的内容再加一个div，让main的内容包含在内层div里。
+
+
+
+## CSS等高布局
+
+table: 设置display: table-cell 就等高的
+
+absolute:  设置子元素的top:0;bottom:0;使得所有子元素的高度都和父元素的高度相同，实现等高效果
+
+```css
+<style>
+body,p{margin: 0;}
+.parent{
+    position: relative;
+    height: 40px;
+}
+.left,.center,.right{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+}
+.left{
+    left: 0;
+    width: 100px;
+}
+.center{
+    left: 120px;
+    right: 120px;
+}
+.right{
+    width: 100px;
+    right: 0;
+}
+</style>
+
+```
+
+```markup
+<div class="parent" style="background-color: lightgrey;">
+    <div class="left" style="background-color: lightblue;">
+        <p>left</p>
+    </div>  
+    <div class="center" style="background-color: pink;">
+        <p>center</p>
+        <p>center</p>
+    </div>          
+    <div class="right" style="background-color: lightgreen;">
+        <p>right</p>
+    </div>        
+</div>
+```
+
+Grid: 
+
+```text
+.parent{
+    display: grid;
+    grid-auto-flow: column;
+    grid-gap:20px;
+}
+```
 

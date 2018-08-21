@@ -20,11 +20,11 @@
 
 ## **CSS选择符有哪些？哪些属性可以继承？**
 
-**id&gt;class&gt;tag**
+行内样式 **&gt;**  id选择器（ \# myid **&gt;** 类选择器（.myclassname）和伪类选择器\( :hover,:focus\) **&gt;** 标签选择器 伪元素\(:after :before\) 
 
-|       **1.id选择器（ \# myid）       2.类选择器（.myclassname）       3.标签选择器（div, h1, p）       4.相邻选择器（h1 + p）       5.子选择器（ul &gt; li）       6.后代选择器（li a）       7.通配符选择器（ \* ）       8.属性选择器（a\[rel = "external"\]）       9.伪类选择器（a:hover, li:nth-child）    \*  可继承的样式： font-size font-family color, UL LI DL DD DT;    \*  不可继承的样式：border padding margin width height ;** |
+|       **1.id选择器（ \# myid）                                               2.类选择器（.myclassname）       3.标签选择器（div, h1, p）       4.相邻选择器（h1 + p）       5.子选择器（ul &gt; li）       6.后代选择器（li a）       7.通配符选择器（ \* ）       8.属性选择器（a\[rel = "external"\]）       9.伪类选择器（a:hover, li:nth-child）    \*  可继承的样式： font-size font-family color, UL LI DL DD DT;    \*  不可继承的样式：border padding margin width height ;** |
 | :--- |
-
+|  |
 
 ## CSS 居中
 
@@ -154,12 +154,7 @@ arrow-up {
 
 ## **CSS里的visibility属性有个collapse属性值是干嘛用的？**
 
-对于普通元素visibility:collapse;会将元素完全隐藏,不占据页面布局空间,与display:none;表现相同.如果目标元素为table,visibility:collapse;将table隐藏,但是会占据页面布局空间.  
-
-
-## **CSS 定义的权重**
-
-标签tag为1， class 为10， id 为100
+对于普通元素visibility:collapse;会将元素完全隐藏,不占据页面布局空间,与display:none;表现相同.如果目标元素为table,visibility:collapse;将table隐藏,但是会占据页面布局空间.
 
 ## **CSS优化、提高性能的方法有哪些？**
 
@@ -177,13 +172,9 @@ arrow-up {
   
 预处理器例如：LESS、Sass、Stylus，用来预编译Sass或less，增强了css代码的复用性， 还有层级、mixin、变量、循环、函数等，具有很方便的UI组件模块化开发能力，极大的提高工作效率。
 
-CSS unit 
-
-rem 
-
 ## float 以及 clear 
 
- 浮动可以理解为让某个div元素脱离标准流，漂浮在标准流之上，和标准流不是一个层次。
+浮动可以理解为让某个div元素脱离标准流，漂浮在标准流之上，和标准流不是一个层次。
 
 ![div3 &#x8BBE;&#x7F6E;&#x4E86;float: left](.gitbook/assets/27005043-61e7e3050eb3466d99f25b10f449daa3.png)
 
@@ -221,8 +212,6 @@ div1, div2 设置float left, 所以两个div 平行浮动，要想让div2下移�
 ## 双飞翼布局
 
 当圣杯布局已经形成同行排列，只不过main值被覆盖了，圣杯布局的第三步是给con容器添加padding属性，而双飞翼布局是为main里面的内容再加一个div，让main的内容包含在内层div里。
-
-
 
 ## CSS等高布局
 

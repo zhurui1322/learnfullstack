@@ -192,10 +192,6 @@ _prototype_ 显式原型
 
  \_\_proto\_\_指向的是**当前对象**的**原型对象**，而prototype指向的，是以**当前函数**作为**构造函数**构造出来的**对象**的**原型对象**
 
-![](https://pic3.zhimg.com/80/58f2b9242ceddea0462689a4b71486ee_hd.png)
-
-
-
 ## Javacript继承的几种实现方式？
 
 ### **1.构造函数绑定**
@@ -410,8 +406,6 @@ prince.__proto__ = Prince.prototype
 
 构造函数里一般是没有return的，但是如果return的是五种简单类型，忽视return，但是如果是object, 则不再返回this 对象，而是返回return的值。
 
-
-
 ## **谈谈This对象的理解**
 
 this总是指向函数的直接调用者（而非间接调用者）； 如果有new关键字，this指向new出来的那个对象； 在事件中，this指向触发这个事件的对象
@@ -450,7 +444,7 @@ if(a instanceof Person){
 
 ## **什么是闭包（closure），为什么要用它**
 
-闭包是指有权访问另一个函数作用域中变量的函数，创建闭包的最常见的方式就是在一个函数内创建另一个函数，通过另一个函数访问这个函数的局部变量,利用闭包可以突破作用链域，将函数内部的变量和方法传递到外部。 闭包的特性： 
+ **内部函数总是可以访问其所在的外部函数中声明的参数和变量，即使在其外部函数被返回（寿命终结）了之后**。  闭包通常用来创建内部变量，使得这些变量不能被外部随意修改，同时又可以通过指定的函数接口来操作。
 
 1. 函数内再嵌套函数 
 2. 内部函数可以引用外层的参数和变量
@@ -524,7 +518,19 @@ var multipleByThree = multiply.bind(this, 3);
 console.log(multipleByThree(4));
 ```
 
-## \*\*\*\*
+## **Javascript垃圾回收**
+
+ 垃圾回收器会**按照固定的时间间隔周期性**的执行。
+
+ 全局变量的生命周期直至浏览器卸载页面才会结束
+
+局部变量只在函数执行的过程中存在。而在这个过程中，会为局部变量在栈（或堆）内存上分配相应的空间，以便存储它们的值。然后在函数中使用这些变量，直至函数执行结束、释放它们的内存以供将来使用。
+
+### 标记清楚
+
+js中最常用的垃圾回收方式就是标记清除。当变量进入环境时，例如，在函数中声明一个变量，就将这个变量标记为“进入环境”。从逻辑上讲，永远不能释放进入环境的变量所占用的内存，因为只要执行流进入相应的环境，就可能会用到它们。而当变量离开环境时，则将其标记为“离开环境”。
+
+GC运行时，会给所有的变量标记，然后去除环境变量已经被环境中变量引用的标记如闭包。之后会销毁带标记的变量。
 
 ## **Json 转换**
 
@@ -539,7 +545,7 @@ var last=obj.toJSONString();
 var last=JSON.stringify(obj);
 ```
 
-## **\["1", "2", "3"\].map\(parseInt\) 答案是多少？** 
+## **\["1", "2", "3"\].map\(parseInt\) 答案是多少？**
 
 function callbackfn\(value, index, array1\) 这是map的函数callback
 
@@ -568,7 +574,7 @@ person = a 在不是strict模式下可以编译 但是再strict模式会说undef
 
 // Assignment to a getter-only property
 
-## 数据的操作
+## 数组的操作
 
 * push\(\): Adds one or more elements to the end of an array and returns the new length of the array.
 * pop\(\): Removes the last element from an array and returns that element.

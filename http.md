@@ -323,31 +323,59 @@ eg：WWW-Authenticate:Basic realm="Basic Auth Test!"  //可以看出服务器对
 * 500 Internal Server Error 最常见的服务器端错误。 
 * 503 Service Unavailable 服务器端暂时无法处理请求（可能是过载或维护）。 \]
 
-## 解决HTTP无状态的问题
+## 解决HTTP无状态的问题Cookie/Session机制详解
 
-1. 通过Cookies保存状态信息
+引入Cookie/Session的原因：HTTP协议是无状态的协议。一旦数据交换完毕，客户端与服务器端的连接就会关闭，再次交换数据需要建立新的连接。这就意味着服务器无法从连接上跟踪会话
 
- 通过Cookies，服务器就可以清楚的知道请求2和请求1来自同一个客户端。
+### 通过Cookies保存状态信息
+
+通过Cookies，服务器就可以清楚的知道请求2和请求1来自同一个客户端。
 
 ![](.gitbook/assets/4796541-c0f7e2f2a29e42de.png)
 
-  坦白的说，一个cookie就是存储在用户主机浏览器中的一小段文本文件。Cookies是纯文本形式，它们不包含任何可执行代码。一个Web页面或服务器告之浏览器来将这些信息存储并且基于一系列规则在之后的每个请求中都将该信息返回至服务器。Web服务器之后可以利用这些信息来标识用户。多数需要登录的站点通常会在你的认证信息通过后来设置一个cookie，之后只要这个cookie存在并且合法，你就可以自由的浏览这个站点的所有部分。再次，cookie只是包含了数据，就其本身而言并不有害。
+ 一个cookie就是存储在用户主机浏览器中的一小段文本文件 **key-value**属性。一个Web页面或服务器告之浏览器来将这些信息存储并且基于一系列规则在之后的每个请求中都将该信息返回至服务器。Web服务器之后可以利用这些信息来标识用户。多数需要登录的站点通常会在你的认证信息通过后来设置一个cookie，之后只要这个cookie存在并且合法，你就可以自由的浏览这个站点的所有部分。
 
-创建cookie
+#### 创建cookie
 
-       通过HTTP的Set-Cookie消息头，Web服务器可以指定存储一个cookie。Set-Cookie消息的格式如下面的字符串（中括号中的部分都是可选的）
+通过HTTP的Set-Cookie消息头，Web服务器可以指定存储一个cookie。Set-Cookie消息的格式如下面的字符串（中括号中的部分都是可选的）
 
- 在没有expires选项时，cookie的寿命仅限于单一的会话中。浏览器的关闭意味这一次会话的结束，所以会话cookie只存在于浏览器保持打开的状态之下。这就是为什么当你登录到一个web应用时经常看到一个checkbox，询问你是否选择存储你的登录信息：如果你选择是的话，那么一个expires选项会被附加到登录的cookie中。如果expires选项设置了一个过去的时间点，那么这个cookie会被立即删除。
+```text
+Set-Cookie:value [ ;expires=date][ ;Max-Age=number][ ;domain=domain][ ;path=path][ ;secure]
+```
 
-|  `Set-Cookie:value [ ;expires=date][ ;domain=domain][ ;path=path][ ;secure]` |
-| :--- |
+在没有expires选项时，cookie的寿命仅限于单一的会话中。浏览器的关闭意味这一次会话的结束，所以会话cookie只存在于浏览器保持打开的状态之下。这就是为什么当你登录到一个web应用时经常看到一个checkbox，询问你是否选择存储你的登录信息：如果你选择是的话，那么一个expires选项会被附加到登录的cookie中。
+
+####  **Cookie的域名**
+
+Cookie在客户端是由浏览器来管理的， **Cookie具有不可跨域名性。正常情况两个二级域名不能相互使用cookie，但是可以通过设置domain参数实现相互使用**
+
+```javascript
+Cookie cookie = new Cookie("time","20080808"); // 新建Cookie
+cookie.setDomain(".helloweenvsfei.com");           // 设置域名
+cookie.setPath("/");                              // 设置路径
+cookie.setMaxAge(Integer.MAX_VALUE);               // 设置有效期
+response.addCookie(cookie);                       // 输出到客户端
+```
+
+#### **安全属性**
+
+可以设置Cookie的secure属性为true。浏览器只会在HTTPS和SSL等安全协议中传输此类Cookie。下面的代码设置secure属性为true：
+
+#### cookie的操作
+
+Cookie并不提供修改、删除操作。如果要修改某个Cookie，只需要新建一个同名的Cookie，添加到response中覆盖原来的Cookie。如果要删除某个Cookie，只需要新建一个同名的Cookie，并将maxAge设置为0
 
 
-1. 通过session保存状态信息
 
- 在没有expires选项时，cookie的寿命仅限于单一的会话中。浏览器的关闭意味这一次会话的结束，所以会话cookie只存在于浏览器保持打开的状态之下。这就是为什么当你登录到一个web应用时经常看到一个checkbox，询问你是否选择存储你的登录信息：如果你选择是的话，那么一个expires选项会被附加到登录的cookie中。如果expires选项设置了一个过去的时间点，那么这个cookie会被立即删除。
+### 通过session保存状态信息
 
-![](.gitbook/assets/4796541-98932aae28e379e9.png)
+**Session是服务器端使用的一种记录客户端状态的机制**，使用上比Cookie简单一些，相应的也**增加了服务器的存储压力**
+
+ **Session对象是在客户端第一次请求服务器的时候创建的**
+
+Session在用户第一次访问服务器的时候自动创建。需要注意只有访问JSP、Servlet等程序时才会创建Session，只访问HTML、IMAGE等静态资源并不会创建Session。如果尚未生成Session，也可以使用request.getSession\(true\)强制生成Session。
+
+ **Session生成后，只要用户继续访问，服务器就会更新Session的最后访问时间，并维护该Session**
 
 **Cookie和Session有以下明显的不同点：**
 

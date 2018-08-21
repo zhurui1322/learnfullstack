@@ -4,6 +4,8 @@
 
 一个网站的网址组成包括协议名，子域名，主域名，端口号。比如 https://github.com/ ，其中https是协议名，www是子域名，github是主域名，端口号是80，当在在页面中从一个url请求数据时，如果这个url的协议名、子域名、主域名、端口号任意一个有一个不同，就会产生跨域问题。
 
+ 浏览器的默认安全策略是禁止跨域的，加上这个，浏览器才会不拦截。
+
 即使是在 http://localhost:80/ 页面请求 http://127.0.0.1:80/ 也会有跨域问题
 
 ```text
@@ -75,7 +77,7 @@ jsonp解决跨域问题的原理是，浏览器的script标签是不受同源策
 
 ## **location.hash + iframe跨域**
 
-##  **window.name + iframe跨域**
+## **window.name + iframe跨域**
 
 ## **postMessage跨域**
 

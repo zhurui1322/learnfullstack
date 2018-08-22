@@ -1,8 +1,6 @@
----
-description: 'https://juejin.im/entry/58c280b1da2f600d8725b887'
----
-
 # Javascript十大常用设计模式
+
+[https://juejin.im/entry/58c280b1da2f600d8725b887](https://juejin.im/entry/58c280b1da2f600d8725b887)
 
 ## 工厂模式
 

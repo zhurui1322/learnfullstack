@@ -80,6 +80,48 @@ div {
 
 ```
 
+## 水平垂直居中
+
+```css
+// 方法一  
+#container{
+    position:relative;
+}
+
+#center{
+    width:100px;
+    height:100px;
+    position:absolute;
+    top:50%;
+    left:50%;
+    margin:-50px 0 0 -50px;
+}
+
+// 方法2 
+#container{
+    position:relative;
+}
+
+#center{
+    position:absolute;
+    margin:auto;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+}
+```
+
+
+
+
+
+
+
+
+
+
+
 ## **display有哪些值？说明他们的作用**
 
 * block         块类型。默认宽度为父元素宽度，可设置宽高，换行显示。

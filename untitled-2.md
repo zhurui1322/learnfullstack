@@ -1,7 +1,3 @@
----
-description: 'https://juejin.im/entry/58c280b1da2f600d8725b887'
----
-
 # Javascript
 
 ## **介绍js有哪些内置对象和基本类型（primitive types）**

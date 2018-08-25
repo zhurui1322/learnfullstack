@@ -9,6 +9,8 @@
 * boolean
 * undefined
 * null
+* object
+* symbol
 
 {% hint style="info" %}
 typeOf varaible 来检查类型
@@ -700,4 +702,6 @@ document.getElementById('list').addEventListener('click', function (e) {
 \*\*\*\*
 
 ## JavaScript内存分析
+
+
 
